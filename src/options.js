@@ -5,6 +5,7 @@ async function initUi() {
     ["add-site-hostname-explanation", "addSiteHostnameExplanation"],
     ["add-site-title", "addSiteTitle"],
     ["masked-sites-title", "maskedSitesTitle"],
+    ["manage-sites-title", "manageSitesTitle"],
   ].forEach(([id, i18nKey]) => {
     document.getElementById(id).innerText = browser.i18n.getMessage(i18nKey);
   });
@@ -13,6 +14,7 @@ async function initUi() {
 
   setupAddForm();
   setupSiteList();
+  setupManageSites();
   setupKeyboardShortcuts();
 }
 
@@ -81,6 +83,37 @@ function setupSiteList() {
       siteListItem.append(hostnameLabel, deleteButton);
       siteList.appendChild(siteListItem);
     });
+}
+
+function getExportDefaultFileName() {
+  const now = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+  const datetime = now
+    .toISOString()
+    .replace(/\.\d+Z$/, "")
+    .replace("T", "_")
+    .replace(/:/g, ".");
+  return browser.i18n.getMessage("exportSitesDefaultFileName", [datetime]);
+}
+
+function setupManageSites() {
+  const manageSitesExportButton = document.getElementById("manage-sites-export-button");
+  manageSitesExportButton.textContent = browser.i18n.getMessage("manageSitesExportButton");
+
+  if (enabledHostnames.size() < 1) {
+    manageSitesExportButton.disabled = true;
+    return;
+  }
+
+  manageSitesExportButton.addEventListener("click", async () => {
+    const fileContent = [...enabledHostnames.get_values()].sort((a, b) => a.localeCompare(b)).join("\n");
+    const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    browser.downloads.download({
+      url: url,
+      filename: getExportDefaultFileName(),
+      saveAs: true,
+    });
+  });
 }
 
 async function setupKeyboardShortcuts() {

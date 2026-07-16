@@ -82,6 +82,24 @@
   "siteListEmpty": {
     "message": "You did not enable Chrome Mask on any site yet!"
   },
+
+  "manageSitesTitle": {
+    "message": "Manage Masked Sites"
+  },
+
+  "manageSitesExportButton": {
+    "message": "Export to file"
+  },
+
+  "exportSitesDefaultFileName": {
+    "message": "chrome-mask-sites_$DATETIME$.txt",
+    "placeholders": {
+      "DATETIME": {
+        "content": "$1"
+      }
+    }
+  },
+
   "shortcutsTitle": {
     "message": "Keyboard Shortcuts"
   },

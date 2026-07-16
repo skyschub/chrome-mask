@@ -57,3 +57,9 @@ input {
     margin: 0;
   }
 }
+
+#manage-sites {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
