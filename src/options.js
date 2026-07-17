@@ -137,6 +137,9 @@ function setupManageSites() {
   const manageSitesExportButton = document.getElementById("manage-sites-export-button");
   manageSitesExportButton.textContent = browser.i18n.getMessage("manageSitesExportButton");
 
+  const manageSitesClearButton = document.getElementById("manage-sites-clear-button");
+  manageSitesClearButton.textContent = browser.i18n.getMessage("manageSitesClearButton");
+
   const manageSitesImportButton = document.getElementById("manage-sites-import-button");
   manageSitesImportButton.textContent = browser.i18n.getMessage("manageSitesImportButton");
   manageSitesImportButton.addEventListener("click", async () => {
@@ -151,6 +154,7 @@ function setupManageSites() {
 
   if (enabledHostnames.size() < 1) {
     manageSitesExportButton.disabled = true;
+    manageSitesClearButton.disabled = true;
     return;
   }
 
@@ -163,6 +167,14 @@ function setupManageSites() {
       filename: getExportDefaultFileName(),
       saveAs: true,
     });
+  });
+
+  manageSitesClearButton.addEventListener("click", async () => {
+    const userChoice = confirm(browser.i18n.getMessage("manageSitesClearConfirmation"));
+    if (userChoice) {
+      await enabledHostnames.clear();
+      window.location.reload();
+    }
   });
 }
 

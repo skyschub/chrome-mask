@@ -95,6 +95,14 @@
     "message": "Import from file"
   },
 
+  "manageSitesClearButton": {
+    "message": "Remove all sites"
+  },
+
+  "manageSitesClearConfirmation": {
+    "message": "Do you want to remove all masked sites?"
+  },
+
   "manageSitesImportError": {
     "message": "[Error] Line $LINE$: Invalid domain name",
     "placeholders": {

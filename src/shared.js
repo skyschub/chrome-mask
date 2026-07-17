@@ -53,6 +53,11 @@ class EnabledHostnamesList {
     await this.#persist();
   }
 
+  async clear() {
+    this.#set.clear();
+    await this.#persist();
+  }
+
   contains(hostname) {
     return this.#set.has(hostname);
   }
