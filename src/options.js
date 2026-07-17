@@ -85,6 +85,44 @@ function setupSiteList() {
     });
 }
 
+function handleImportFilepicker(ev) {
+  const fileReaderOnLoadHandler = async function () {
+    let result = this.result;
+    if (typeof this.result !== "string" || this.result === "") {
+      return;
+    }
+    const lines = result.split(/\r?\n/);
+    for (const [index, val] of lines.entries()) {
+      if (val === "") {
+        continue;
+      }
+      const maybeHostname = tryValidateHostname(val);
+      if (!maybeHostname) {
+        alert(browser.i18n.getMessage("manageSitesImportError", [index + 1]));
+        window.location.reload();
+        break;
+      }
+
+      if (enabledHostnames.contains(maybeHostname)) {
+        continue;
+      }
+
+      await enabledHostnames.add(maybeHostname);
+    }
+    window.location.reload();
+  };
+  const file = ev.target.files[0];
+  if (file === undefined || file.name === "") {
+    return;
+  }
+  if (file.type.indexOf("text") !== 0) {
+    return;
+  }
+  const fr = new FileReader();
+  fr.addEventListener("load", fileReaderOnLoadHandler);
+  fr.readAsText(file);
+}
+
 function getExportDefaultFileName() {
   const now = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
   const datetime = now
@@ -98,6 +136,18 @@ function getExportDefaultFileName() {
 function setupManageSites() {
   const manageSitesExportButton = document.getElementById("manage-sites-export-button");
   manageSitesExportButton.textContent = browser.i18n.getMessage("manageSitesExportButton");
+
+  const manageSitesImportButton = document.getElementById("manage-sites-import-button");
+  manageSitesImportButton.textContent = browser.i18n.getMessage("manageSitesImportButton");
+  manageSitesImportButton.addEventListener("click", async () => {
+    const input = document.getElementById("manage-sites-import-filepicker");
+    input.click();
+  });
+
+  const manageSitesImportFilepicker = document.getElementById("manage-sites-import-filepicker");
+  manageSitesImportFilepicker.addEventListener("change", async (ev) => {
+    handleImportFilepicker(ev);
+  });
 
   if (enabledHostnames.size() < 1) {
     manageSitesExportButton.disabled = true;

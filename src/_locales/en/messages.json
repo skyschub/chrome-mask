@@ -91,6 +91,19 @@
     "message": "Export to file"
   },
 
+  "manageSitesImportButton": {
+    "message": "Import from file"
+  },
+
+  "manageSitesImportError": {
+    "message": "[Error] Line $LINE$: Invalid domain name",
+    "placeholders": {
+      "LINE": {
+        "content": "$1"
+      }
+    }
+  },
+
   "exportSitesDefaultFileName": {
     "message": "chrome-mask-sites_$DATETIME$.txt",
     "placeholders": {
