@@ -127,9 +127,9 @@ class ChromeUAStringManager {
   #remoteUrl = "https://chrome-mask-remote-storage.0b101010.services/current-chrome-major-version.txt";
 
   // This are just fallbacks in the case we somehow have to make a request before everything is loaded.
-  #currentChromeVersion = "148";
+  #currentChromeVersion = "157";
   #currentPlatform = "win";
-  #currentUAString = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36`;
+  #currentUAString = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36`;
 
   async init() {
     const platformInfo = await browser.runtime.getPlatformInfo();
