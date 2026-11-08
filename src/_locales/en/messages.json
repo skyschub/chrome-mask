@@ -43,6 +43,35 @@
     "message": "The mask cannot work on this site."
   },
 
+  "maskStatusBlocked": {
+    "message": "Chrome Mask cannot be enabled on this site."
+  },
+
+  "blockedExplanation": {
+    "message": "This site is not blocking Firefox and is known to break when Chrome Mask is enabled. $READ_MORE_LINK$.",
+    "placeholders": {
+      "READ_MORE_LINK": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "blockedExplanationLink": {
+    "message": "Read more"
+  },
+
+  "blocklistSectionTitle": {
+    "message": "Domain blocklist"
+  },
+
+  "blocklistSectionStatus": {
+    "message": "The domain blocklist is currently disabled. Sites on the blocklist can be masked. DO NOT file bug reports or leave bad reviews for sites on the blocklist."
+  },
+
+  "blocklistReenableButton": {
+    "message": "Re-enable blocklist"
+  },
+
   "preferencesButton": {
     "message": "Preferences"
   },
@@ -65,6 +94,18 @@
 
   "addSiteErrorInvalid": {
     "message": "Please enter a valid domain!"
+  },
+
+  "addSiteErrorBlocked": {
+    "message": "Chrome Mask cannot be enabled for this domain!"
+  },
+
+  "blocklistDisabledNotice": {
+    "message": "The domain blocklist is now disabled."
+  },
+
+  "blocklistEnabledNotice": {
+    "message": "The domain blocklist is now enabled."
   },
 
   "addSiteErrorAlreadyActive": {

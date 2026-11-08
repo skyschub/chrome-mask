@@ -13,9 +13,29 @@ async function initUi() {
   document.getElementById("add-site-button").value = browser.i18n.getMessage("addSiteButton");
 
   setupAddForm();
+  setupBlocklistSection();
   setupSiteList();
   setupManageSites();
   setupKeyboardShortcuts();
+}
+
+function setupBlocklistSection() {
+  if (!enabledHostnames.isBlocklistDisabled()) {
+    return;
+  }
+
+  document.getElementById("blocklist-title").innerText = browser.i18n.getMessage("blocklistSectionTitle");
+  document.getElementById("blocklist-status").innerText = browser.i18n.getMessage("blocklistSectionStatus");
+
+  const reenableButton = document.getElementById("blocklist-reenable-button");
+  reenableButton.textContent = browser.i18n.getMessage("blocklistReenableButton");
+  reenableButton.addEventListener("click", async () => {
+    await enabledHostnames.setBlocklistDisabled(false);
+    alert(browser.i18n.getMessage("blocklistEnabledNotice"));
+    window.location.reload();
+  });
+
+  document.getElementById("blocklist-section").style.display = "block";
 }
 
 function tryValidateHostname(input) {
@@ -36,9 +56,25 @@ function setupAddForm() {
   document.getElementById("add-site-form").addEventListener("submit", async (ev) => {
     ev.preventDefault();
 
+    if (await enabledHostnames.tryToggleBlocklist(inputEl.value)) {
+      alert(
+        browser.i18n.getMessage(
+          enabledHostnames.isBlocklistDisabled() ? "blocklistDisabledNotice" : "blocklistEnabledNotice",
+        ),
+      );
+      inputEl.value = "";
+      window.location.reload();
+      return false;
+    }
+
     const maybeHostname = tryValidateHostname(inputEl.value);
     if (!maybeHostname) {
       alert(browser.i18n.getMessage("addSiteErrorInvalid"));
+      return false;
+    }
+
+    if (enabledHostnames.isBlocked(maybeHostname)) {
+      alert(browser.i18n.getMessage("addSiteErrorBlocked"));
       return false;
     }
 
@@ -103,12 +139,17 @@ function handleImportFilepicker(ev) {
         break;
       }
 
+      if (enabledHostnames.isBlocked(maybeHostname)) {
+        continue;
+      }
+
       if (enabledHostnames.contains(maybeHostname)) {
         continue;
       }
 
       await enabledHostnames.add(maybeHostname);
     }
+
     window.location.reload();
   };
   const file = ev.target.files[0];

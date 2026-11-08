@@ -43,6 +43,35 @@
     "message": "Die Maske kann auf dieser Seite nicht funktionieren."
   },
 
+  "maskStatusBlocked": {
+    "message": "Die Chrome-Maske kann auf dieser Seite nicht aktiviert werden."
+  },
+
+  "blockedExplanation": {
+    "message": "Diese Seite blockiert Firefox nicht und funktioniert nicht mehr richtig, wenn die Chrome-Maske aktiviert ist. $READ_MORE_LINK$.",
+    "placeholders": {
+      "READ_MORE_LINK": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "blockedExplanationLink": {
+    "message": "Mehr erfahren"
+  },
+
+  "blocklistSectionTitle": {
+    "message": "Domain-Sperrliste"
+  },
+
+  "blocklistSectionStatus": {
+    "message": "Die Domain-Sperrliste ist derzeit deaktiviert. Seiten auf der Sperrliste können maskiert werden. Melde KEINE Fehler und hinterlasse KEINE schlechten Bewertungen für Seiten auf der Sperrliste."
+  },
+
+  "blocklistReenableButton": {
+    "message": "Sperrliste wieder aktivieren"
+  },
+
   "preferencesButton": {
     "message": "Einstellungen"
   },
@@ -67,6 +96,18 @@
     "message": "Bitte gib eine valide Domain an!"
   },
 
+  "addSiteErrorBlocked": {
+    "message": "Die Chrome-Maske kann für diese Domain nicht aktiviert werden!"
+  },
+
+  "blocklistDisabledNotice": {
+    "message": "Die Domain-Sperrliste ist jetzt deaktiviert."
+  },
+
+  "blocklistEnabledNotice": {
+    "message": "Die Domain-Sperrliste ist jetzt aktiviert."
+  },
+
   "addSiteErrorAlreadyActive": {
     "message": "Die Chrome-Maske ist auf dieser Seite bereits aktiv!"
   },
@@ -82,6 +123,44 @@
   "siteListEmpty": {
     "message": "Die Chrome-Maske ist noch auf keiner Seite aktiv!"
   },
+  "manageSitesTitle": {
+    "message": "Maskierte Seiten verwalten"
+  },
+
+  "manageSitesExportButton": {
+    "message": "In Datei exportieren"
+  },
+
+  "manageSitesImportButton": {
+    "message": "Aus Datei importieren"
+  },
+
+  "manageSitesClearButton": {
+    "message": "Alle Seiten entfernen"
+  },
+
+  "manageSitesClearConfirmation": {
+    "message": "Möchtest du alle maskierten Seiten entfernen?"
+  },
+
+  "manageSitesImportError": {
+    "message": "[Fehler] Zeile $LINE$: Ungültiger Domainname",
+    "placeholders": {
+      "LINE": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "exportSitesDefaultFileName": {
+    "message": "chrome-mask-sites_$DATETIME$.txt",
+    "placeholders": {
+      "DATETIME": {
+        "content": "$1"
+      }
+    }
+  },
+
   "shortcutsTitle": {
     "message": "Tastenkürzel"
   },

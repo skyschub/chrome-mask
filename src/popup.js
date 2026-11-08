@@ -25,6 +25,18 @@ async function updateUiState() {
   if (currentProtocol == "moz-extension:" || currentHostname == "") {
     maskStatus.innerText = browser.i18n.getMessage("maskStatusUnsupported");
     fancyContainer.style.display = "none";
+  } else if (enabledHostnames.isBlocked(currentHostname)) {
+    maskStatus.innerText = browser.i18n.getMessage("maskStatusBlocked");
+    fancyContainer.style.display = "none";
+
+    const blockExplanationLink = document.createElement("a");
+    blockExplanationLink.href = "https://overengineer.dev/documents/chrome-mask-blocklist/";
+    blockExplanationLink.target = "_blank";
+    blockExplanationLink.innerText = browser.i18n.getMessage("blockedExplanationLink");
+
+    const blockedExplanation = document.getElementById("blockedExplanation");
+    blockedExplanation.innerHTML = browser.i18n.getMessage("blockedExplanation", [blockExplanationLink.outerHTML]);
+    blockedExplanation.style.display = "block";
   } else if (enabledHostnames.contains(currentHostname)) {
     maskStatus.innerText = browser.i18n.getMessage("maskStatusOn");
     checkbox.checked = true;
