@@ -1,3 +1,7 @@
+# 11.0.0
+
+Chrome Mask now refuses to be enabled on certain sites that do not block Firefox and are known to break with it enabled. [I explained the reasoning here](https://overengineer.dev/documents/chrome-mask-blocklist/).
+
 # 10.1.0
 
 The last version added a button to export a list of sites where Chrome Mask is enabled. Apparently, people lost their mind over the added `downloads` permissions to make that happen - so I found a creative workaround to get rid of that permissions. There are no functional changes compared to `v10.0.0`.
